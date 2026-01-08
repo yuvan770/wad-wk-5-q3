@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .calculator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Calculator</h1>
+    
+    <div class="calculator">
+        <input type="number" id="num1" placeholder="Enter number">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" id="num2" placeholder="Enter number">
+        <button onclick="calculate()">Calculate</button>
+    </div>
+    
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var operator = document.getElementById("operator").value;
+            var result = document.getElementById("result");
+            var answer;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                result.textContent = "Please enter valid numbers";
+                return;
+            }
+
+            switch(operator) {
+                case "+":
+                    answer = num1 + num2;
+                    break;
+                case "-":
+                    answer = num1 - num2;
+                    break;
+                case "*":
+                    answer = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 === 0) {
+                        result.textContent = "Cannot divide by zero";
+                        return;
+                    }
+                    answer = num1 / num2;
+                    break;
+                default:
+                    result.textContent = "Invalid operator";
+                    return;
+            }
+
+            result.textContent = "Result: " + answer;
+        }
+    </script>
+</body>
+</html>
